@@ -16,10 +16,10 @@ def conectar_db():
     while tentativas > 0:
         try:
             conexao = mysql.connector.connect(
-                host='127.0.0.1',
-                database='petvida',
-                user='aluno',
-                password='123456'
+                host=DB_HOST,
+                database=DB_NAME,
+                user=DB_USER,
+                password=DB_PASSWORD
             )
             return conexao
         except mysql.connector.Error as err:

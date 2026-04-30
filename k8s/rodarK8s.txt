@@ -1,0 +1,32 @@
+Subir a imagem do Flask
+
+    docker build -t k8s/petvida-flask:1.0 .
+
+Subir as instâncias K8 - Sequência correta
+
+    kubectl apply -f k8s/namespace.yaml
+
+    kubectl apply -f k8s/mysql-secret.yaml
+
+    kubectl apply -f k8s/mysql-configmap.yaml
+
+    kubectl apply -f k8s/mysql-initdb-configmap.yaml
+
+    kubectl apply -f k8s/mysql-service.yaml
+
+    kubectl apply -f k8s/mysql-statefulset.yaml
+
+    kubectl apply -f k8s/flask-configmap.yaml
+
+    kubectl apply -f k8s/flask-deployment.yaml
+
+    kubectl apply -f k8s/flask-service.yaml
+
+Subir as instâncias K8 - Sequência correta
+
+    kubectl get all -n petvida
+    kubectl get pvc -n petvida
+
+    kubectl port-forward svc/flask-service 5000:5000 -n petvida
+
+http://localhost:5000
