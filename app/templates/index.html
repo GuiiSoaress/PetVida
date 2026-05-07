@@ -1,14 +1,507 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PetVida — Sistema de gerenciamento para pet shops. Cadastro de clientes, pets, fornecedores, produtos, serviços e vendas.">
+  <title>PetVida — Gestão Pet Shop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>P</text></svg>">
 </head>
 
 <body>
+  <div id="toast-container" class="toast-container"></div>
 
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <div class="app-container">
+
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="sidebar-logo" onclick="showSection('dashboard'); return false;">
+          <div class="logo-icon"></div>
+          <span class="logo-text">PetVida</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <p class="nav-section-title">Principal</p>
+        <button class="nav-item active" data-section="dashboard">
+          <span class="nav-icon"></span>
+          Dashboard
+        </button>
+
+        <p class="nav-section-title">Cadastros</p>
+        <button class="nav-item" data-section="clientes">
+          <span class="nav-icon"></span>
+          Clientes
+          <span class="nav-badge">0</span>
+        </button>
+        <button class="nav-item" data-section="pets">
+          <span class="nav-icon"></span>
+          Pets
+          <span class="nav-badge">0</span>
+        </button>
+        <button class="nav-item" data-section="fornecedores">
+          <span class="nav-icon"></span>
+          Fornecedores
+          <span class="nav-badge">0</span>
+        </button>
+        <button class="nav-item" data-section="produtos">
+          <span class="nav-icon"></span>
+          Produtos
+          <span class="nav-badge">0</span>
+        </button>
+
+        <p class="nav-section-title">Operações</p>
+        <button class="nav-item" data-section="servicos">
+          <span class="nav-icon"></span>
+          Serviços
+          <span class="nav-badge">0</span>
+        </button>
+        <button class="nav-item" data-section="vendas">
+          <span class="nav-icon"></span>
+          Vendas
+          <span class="nav-badge">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>PetVida © 2026</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="top-header">
+        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+        <h1 id="header-title" class="header-title">Dashboard</h1>
+        <span></span>
+      </header>
+
+      <div class="page-content">
+
+        <section id="section-dashboard" class="page-section active">
+          <div class="welcome-banner">
+            <h2>Bem-vindo ao <span>PetVida</span></h2>
+            <p>Gerencie clientes, pets, fornecedores, produtos, serviços e vendas de forma simples e eficiente.</p>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="stat-card" onclick="showSection('clientes')">
+              <div class="card-icon green"></div>
+              <div class="card-value" id="count-clientes">0</div>
+              <div class="card-label">Clientes</div>
+            </div>
+            <div class="stat-card" onclick="showSection('pets')">
+              <div class="card-icon blue"></div>
+              <div class="card-value" id="count-pets">0</div>
+              <div class="card-label">Pets</div>
+            </div>
+            <div class="stat-card" onclick="showSection('fornecedores')">
+              <div class="card-icon orange"></div>
+              <div class="card-value" id="count-fornecedores">0</div>
+              <div class="card-label">Fornecedores</div>
+            </div>
+            <div class="stat-card" onclick="showSection('produtos')">
+              <div class="card-icon purple"></div>
+              <div class="card-value" id="count-produtos">0</div>
+              <div class="card-label">Produtos</div>
+            </div>
+            <div class="stat-card" onclick="showSection('servicos')">
+              <div class="card-icon pink"></div>
+              <div class="card-value" id="count-servicos">0</div>
+              <div class="card-label">Serviços</div>
+            </div>
+            <div class="stat-card" onclick="showSection('vendas')">
+              <div class="card-icon teal"></div>
+              <div class="card-value" id="count-vendas">0</div>
+              <div class="card-label">Vendas</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-clientes" class="page-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="title-icon"></span> Clientes
+            </h2>
+          </div>
+
+          <div class="form-card">
+            <form id="form-cliente">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="cliente-nome">Nome</label>
+                  <input type="text" id="cliente-nome" name="nome" placeholder="Ex: João Silva" required>
+                </div>
+                <div class="form-group">
+                  <label for="cliente-telefone">Telefone</label>
+                  <input type="text" id="cliente-telefone" name="telefone" placeholder="Ex: 11999999999" required>
+                </div>
+                <div class="form-group">
+                  <label for="cliente-email">Email</label>
+                  <input type="email" id="cliente-email" name="email" placeholder="Ex: joao@email.com" required>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody id="table-clientes">
+                  <tr>
+                    <td colspan="4">
+                      <div class="loading-overlay">
+                        <div class="spinner"></div> Carregando...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-pets" class="page-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="title-icon"></span> Pets
+            </h2>
+          </div>
+
+          <div class="form-card">
+            <form id="form-pet">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="pet-nome">Nome do Pet</label>
+                  <input type="text" id="pet-nome" name="nome" placeholder="Ex: Rex" required>
+                </div>
+                <div class="form-group">
+                  <label for="pet-tipo">Tipo</label>
+                  <input type="text" id="pet-tipo" name="tipo" placeholder="Ex: Cachorro, Gato..." required>
+                </div>
+                <div class="form-group">
+                  <label for="pet-idade">Idade (anos)</label>
+                  <input type="number" id="pet-idade" name="idade" placeholder="Ex: 3" min="0" required>
+                </div>
+                <div class="form-group">
+                  <label for="venda-id-cliente">Cliente</label>
+                  <select name="id_cliente" id="venda-id-cliente">
+                    <option value="">Selecione um cliente...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary"> Cadastrar Pet</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Idade</th>
+                    <th>Clientes</th>
+                  </tr>
+                </thead>
+                <tbody id="table-pets">
+                  <tr>
+                    <td colspan="5">
+                      <div class="loading-overlay">
+                        <div class="spinner"></div> Carregando...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-fornecedores" class="page-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="title-icon"></span> Fornecedores
+            </h2>
+          </div>
+
+          <div class="form-card">
+            <form id="form-fornecedor">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="fornecedor-nome">Nome</label>
+                  <input type="text" id="fornecedor-nome" name="nome" placeholder="Ex: PetShop Distribuidora" required>
+                </div>
+                <div class="form-group">
+                  <label for="fornecedor-telefone">Telefone</label>
+                  <input type="text" id="fornecedor-telefone" name="telefone" placeholder="Ex: 1133334444" required>
+                </div>
+                <div class="form-group">
+                  <label for="fornecedor-email">Email</label>
+                  <input type="email" id="fornecedor-email" name="email" placeholder="Ex: contato@petshop.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="fornecedor-produtos">Produtos (opcional)</label>
+                  <input type="text" id="fornecedor-produtos" name="produtos" placeholder="Ex: Ração, Brinquedos, Medicamentos">
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Cadastrar Fornecedor</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Produtos</th>
+                  </tr>
+                </thead>
+                <tbody id="table-fornecedores">
+                  <tr>
+                    <td colspan="5">
+                      <div class="loading-overlay">
+                        <div class="spinner"></div> Carregando...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-produtos" class="page-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="title-icon"></span> Produtos
+            </h2>
+          </div>
+
+          <div class="form-card">
+            <form id="form-produto">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="produto-nome">Nome</label>
+                  <input type="text" id="produto-nome" name="nome" placeholder="Ex: Ração Premium 15kg" required>
+                </div>
+                <div class="form-group">
+                  <label for="produto-descricao">Descrição</label>
+                  <input type="text" id="produto-descricao" name="descricao" placeholder="Ex: Ração para cães adultos" required>
+                </div>
+                <div class="form-group">
+                  <label for="produto-preco">Preço (R$)</label>
+                  <input type="number" id="produto-preco" name="preco" placeholder="Ex: 189.90" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                  <label for="produto-estoque">Estoque</label>
+                  <input type="number" id="produto-estoque" name="estoque" placeholder="Ex: 50" min="0" required>
+                </div>
+                <div class="form-group">
+                  <label for="produto-id-fornecedor">Fornecedor</label>
+                  <select id="produto-id-fornecedor" name="id_fornecedor" required>
+                    <option value="">Selecione um fornecedor...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>ID Fornecedor</th>
+                  </tr>
+                </thead>
+                <tbody id="table-produtos">
+                  <tr>
+                    <td colspan="6">
+                      <div class="loading-overlay">
+                        <div class="spinner"></div> Carregando...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-servicos" class="page-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="title-icon"></span> Serviços
+            </h2>
+          </div>
+
+          <div class="form-card">
+            <form id="form-servico">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="servico-tipo">Tipo de Serviço</label>
+                  <input type="text" id="servico-tipo" name="tipo_servico" placeholder="Ex: Banho e Tosa" required>
+                </div>
+                <div class="form-group">
+                  <label for="servico-data">Data</label>
+                  <input type="date" id="servico-data" name="data" required>
+                </div>
+                <div class="form-group">
+                  <label for="servico-valor">Valor (R$)</label>
+                  <input type="number" id="servico-valor" name="valor" placeholder="Ex: 75.00" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                  <label for="servico-id-pet">Pet</label>
+                  <select id="servico-id-pet" name="id_pet" required>
+                    <option value="">Selecione um pet...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Cadastrar Serviço</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>ID Pet</th>
+                  </tr>
+                </thead>
+                <tbody id="table-servicos">
+                  <tr>
+                    <td colspan="5">
+                      <div class="loading-overlay">
+                        <div class="spinner"></div> Carregando...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-vendas" class="page-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <span class="title-icon"></span> Vendas
+            </h2>
+          </div>
+
+          <div class="form-card">
+            <form id="form-venda">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="venda-quantidade">Quantidade</label>
+                  <input type="number" id="venda-quantidade" name="quantidade" placeholder="Ex: 2" min="1" required>
+                </div>
+                <div class="form-group">
+                  <label for="venda-data">Data</label>
+                  <input type="date" id="venda-data" name="data" required>
+                </div>
+                <div class="form-group">
+                  <label for="venda-valor">Valor Total (R$)</label>
+                  <input type="number" id="venda-valor" name="valor" placeholder="Ex: 379.80" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                  <label for="venda-id-produto">Produto</label>
+                  <select id="venda-id-produto" name="id_produto" required>
+                    <option value="">Selecione um produto...</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="venda-id-cliente">Cliente</label>
+                  <select name="id_cliente" id="venda-id-cliente">
+                    <option value="">Selecione um cliente...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Cadastrar Venda</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="table-card">
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Quantidade</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Produtos</th>
+                    <th>Clientes</th>
+                  </tr>
+                </thead>
+                <tbody id="table-vendas">
+                  <tr>
+                    <td colspan="6">
+                      <div class="loading-overlay">
+                        <div class="spinner"></div> Carregando...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 
 </html>

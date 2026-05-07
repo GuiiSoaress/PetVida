@@ -1,6 +1,6 @@
 Subir a imagem do Flask
 
-    docker build -t k8s/petvida-flask:1.0 .
+    docker build -t petvida-flask:1.0 .
 
 Subir as instâncias K8 - Sequência correta
 
@@ -28,5 +28,13 @@ Subir as instâncias K8 - Sequência correta
     kubectl get pvc -n petvida
 
     kubectl port-forward svc/flask-service 5000:5000 -n petvida
+
+
+Caso tenha alterado o código do Flask, subir a imagem e reiniciar as instâncias K8
+
+    docker build -t petvida-flask:1.0 ./app
+
+    kubectl rollout restart deployment flask-app -n petvida
+
 
 http://localhost:5000
