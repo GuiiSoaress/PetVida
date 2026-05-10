@@ -7,7 +7,6 @@
   <meta name="description" content="PetVida — Sistema de gerenciamento para pet shops. Cadastro de clientes, pets, fornecedores, produtos, serviços e vendas.">
   <title>PetVida — Gestão Pet Shop</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>P</text></svg>">
 </head>
 
 <body>
@@ -20,7 +19,6 @@
     <aside id="sidebar" class="sidebar">
       <div class="sidebar-header">
         <a href="#" class="sidebar-logo" onclick="showSection('dashboard'); return false;">
-          <div class="logo-icon"></div>
           <span class="logo-text">PetVida</span>
         </a>
       </div>
@@ -34,34 +32,28 @@
 
         <p class="nav-section-title">Cadastros</p>
         <button class="nav-item" data-section="clientes">
-          <span class="nav-icon"></span>
           Clientes
           <span class="nav-badge">0</span>
         </button>
         <button class="nav-item" data-section="pets">
-          <span class="nav-icon"></span>
           Pets
           <span class="nav-badge">0</span>
         </button>
         <button class="nav-item" data-section="fornecedores">
-          <span class="nav-icon"></span>
           Fornecedores
           <span class="nav-badge">0</span>
         </button>
         <button class="nav-item" data-section="produtos">
-          <span class="nav-icon"></span>
           Produtos
           <span class="nav-badge">0</span>
         </button>
 
         <p class="nav-section-title">Operações</p>
         <button class="nav-item" data-section="servicos">
-          <span class="nav-icon"></span>
           Serviços
           <span class="nav-badge">0</span>
         </button>
         <button class="nav-item" data-section="vendas">
-          <span class="nav-icon"></span>
           Vendas
           <span class="nav-badge">0</span>
         </button>
@@ -90,32 +82,26 @@
 
           <div class="dashboard-grid">
             <div class="stat-card" onclick="showSection('clientes')">
-              <div class="card-icon green"></div>
               <div class="card-value" id="count-clientes">0</div>
               <div class="card-label">Clientes</div>
             </div>
             <div class="stat-card" onclick="showSection('pets')">
-              <div class="card-icon blue"></div>
               <div class="card-value" id="count-pets">0</div>
               <div class="card-label">Pets</div>
             </div>
             <div class="stat-card" onclick="showSection('fornecedores')">
-              <div class="card-icon orange"></div>
               <div class="card-value" id="count-fornecedores">0</div>
               <div class="card-label">Fornecedores</div>
             </div>
             <div class="stat-card" onclick="showSection('produtos')">
-              <div class="card-icon purple"></div>
               <div class="card-value" id="count-produtos">0</div>
               <div class="card-label">Produtos</div>
             </div>
             <div class="stat-card" onclick="showSection('servicos')">
-              <div class="card-icon pink"></div>
               <div class="card-value" id="count-servicos">0</div>
               <div class="card-label">Serviços</div>
             </div>
             <div class="stat-card" onclick="showSection('vendas')">
-              <div class="card-icon teal"></div>
               <div class="card-value" id="count-vendas">0</div>
               <div class="card-label">Vendas</div>
             </div>
