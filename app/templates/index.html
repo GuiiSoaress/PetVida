@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="PetVida — Sistema de gerenciamento para pet shops. Cadastro de clientes, pets, fornecedores, produtos, serviços e vendas.">
   <title>PetVida — Gestão Pet Shop</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
 </head>
 
 <body>
@@ -69,7 +70,18 @@
       <header class="top-header">
         <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
         <h1 id="header-title" class="header-title">Dashboard</h1>
-        <span></span>
+
+        <nav class="tab-bar-inline">
+          <button class="tab-btn active" data-section="dashboard">Home</button>
+          <button class="tab-btn" data-section="clientes">Clientes</button>
+          <button class="tab-btn" data-section="pets">Pets</button>
+          <button class="tab-btn" data-section="fornecedores">Fornecedores</button>
+          <button class="tab-btn" data-section="produtos">Produtos</button>
+          <button class="tab-btn" data-section="servicos">Serviços</button>
+          <button class="tab-btn" data-section="vendas">Vendas</button>
+        </nav>
+
+        <span class="header-spacer"></span>
       </header>
 
       <div class="page-content">
@@ -110,9 +122,7 @@
 
         <section id="section-clientes" class="page-section">
           <div class="section-header">
-            <h2 class="section-title">
-              <span class="title-icon"></span> Clientes
-            </h2>
+            <h2 class="section-title">Clientes</h2>
           </div>
 
           <div class="form-card">
@@ -165,9 +175,7 @@
 
         <section id="section-pets" class="page-section">
           <div class="section-header">
-            <h2 class="section-title">
-              <span class="title-icon"></span> Pets
-            </h2>
+            <h2 class="section-title">Pets</h2>
           </div>
 
           <div class="form-card">
@@ -186,14 +194,14 @@
                   <input type="number" id="pet-idade" name="idade" placeholder="Ex: 3" min="0" required>
                 </div>
                 <div class="form-group">
-                  <label for="venda-id-cliente">Cliente</label>
-                  <select name="id_cliente" id="venda-id-cliente">
+                  <label for="pet-id-cliente">Cliente</label>
+                  <select name="id_cliente" id="pet-id-cliente">
                     <option value="">Selecione um cliente...</option>
                   </select>
                 </div>
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary"> Cadastrar Pet</button>
+                <button type="submit" class="btn btn-primary">Cadastrar Pet</button>
                 <button type="reset" class="btn btn-secondary">Limpar</button>
               </div>
             </form>
@@ -208,7 +216,7 @@
                     <th>Nome</th>
                     <th>Tipo</th>
                     <th>Idade</th>
-                    <th>Clientes</th>
+                    <th>Cliente</th>
                   </tr>
                 </thead>
                 <tbody id="table-pets">
@@ -227,9 +235,7 @@
 
         <section id="section-fornecedores" class="page-section">
           <div class="section-header">
-            <h2 class="section-title">
-              <span class="title-icon"></span> Fornecedores
-            </h2>
+            <h2 class="section-title">Fornecedores</h2>
           </div>
 
           <div class="form-card">
@@ -287,9 +293,7 @@
 
         <section id="section-produtos" class="page-section">
           <div class="section-header">
-            <h2 class="section-title">
-              <span class="title-icon"></span> Produtos
-            </h2>
+            <h2 class="section-title">Produtos</h2>
           </div>
 
           <div class="form-card">
@@ -335,7 +339,7 @@
                     <th>Descrição</th>
                     <th>Preço</th>
                     <th>Estoque</th>
-                    <th>ID Fornecedor</th>
+                    <th>Fornecedor</th>
                   </tr>
                 </thead>
                 <tbody id="table-produtos">
@@ -354,9 +358,7 @@
 
         <section id="section-servicos" class="page-section">
           <div class="section-header">
-            <h2 class="section-title">
-              <span class="title-icon"></span> Serviços
-            </h2>
+            <h2 class="section-title">Serviços</h2>
           </div>
 
           <div class="form-card">
@@ -397,7 +399,7 @@
                     <th>Tipo</th>
                     <th>Data</th>
                     <th>Valor</th>
-                    <th>ID Pet</th>
+                    <th>Pet</th>
                   </tr>
                 </thead>
                 <tbody id="table-servicos">
@@ -416,9 +418,7 @@
 
         <section id="section-vendas" class="page-section">
           <div class="section-header">
-            <h2 class="section-title">
-              <span class="title-icon"></span> Vendas
-            </h2>
+            <h2 class="section-title">Vendas</h2>
           </div>
 
           <div class="form-card">
@@ -465,8 +465,8 @@
                     <th>Quantidade</th>
                     <th>Data</th>
                     <th>Valor</th>
-                    <th>Produtos</th>
-                    <th>Clientes</th>
+                    <th>Produto</th>
+                    <th>Cliente</th>
                   </tr>
                 </thead>
                 <tbody id="table-vendas">
@@ -487,7 +487,7 @@
     </main>
   </div>
 
-  <script src="{{ url_for('static', filename='app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
 </body>
-
 </html>
